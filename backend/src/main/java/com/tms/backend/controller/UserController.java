@@ -1,39 +1,36 @@
-package com.timesheet.controller;
+package com.tms.backend.controller;
 
-import com.timesheet.model.*;
-import com.timesheet.service.TimesheetService;
+import com.tms.backend.model.User;
+import com.tms.backend.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/timesheet")
+@RequestMapping("/users")
 @CrossOrigin
-public class TimesheetController {
+public class UserController {
 
     @Autowired
-    private TimesheetService service;
+    private UserRepository userRepo;
 
-    @PostMapping("/create/{userId}")
-    public Timesheet create(@PathVariable Long userId) {
-        return service.createTimesheet(userId);
+    // Create User
+    @PostMapping("/create")
+    public User createUser(@RequestBody User user) {
+        return userRepo.save(user);
     }
 
-    @PostMapping("/entry")
-    public TimesheetEntry addEntry(@RequestBody TimesheetEntry entry) {
-        return service.addEntry(entry);
+    // Get All Users
+    @GetMapping("/")
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
     }
 
-    @PostMapping("/submit/{id}")
-    public Timesheet submit(@PathVariable Long id) {
-        return service.submit(id);
-    }
-
-    @PostMapping("/approve/{id}/{managerId}")
-    public Timesheet approve(
-        @PathVariable Long id,
-        @PathVariable Long managerId) {
-
-        return service.approve(id, managerId);
+    // Get Employees under Manager
+    @GetMapping("/manager/{managerId}")
+    public List<User> getByManager(@PathVariable Long managerId) {
+        return userRepo.findByManagerId(managerId);
     }
 }
