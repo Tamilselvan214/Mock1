@@ -1,10 +1,13 @@
-package com.timesheet.model;
+package com.tms.backend.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "timesheet")
+@Data
 public class Timesheet {
 
     @Id
@@ -17,6 +20,4 @@ public class Timesheet {
     private LocalDate weekStart;
 
     private String status;
-
-    // getters and setters
 }

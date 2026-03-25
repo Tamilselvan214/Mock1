@@ -1,6 +1,10 @@
+package com.tms.backend.model;
+
+import jakarta.persistence.*;
+
 @Entity
 @Table(name = "users")
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

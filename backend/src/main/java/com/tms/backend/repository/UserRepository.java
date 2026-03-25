@@ -1,14 +1,14 @@
-package com.timesheet.repository;
+package com.tms.backend.repository;
 
-import com.timesheet.model.User;
+import com.tms.backend.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<Users, Long> {
 
-    Optional<User> findByEmail(String email);
+    Optional<Users> findByEmail(String email);
 
-    List<User> findByManagerId(Long managerId);
+    List<Users> findByManagerId(Long managerId);
 }
